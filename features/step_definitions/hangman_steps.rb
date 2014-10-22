@@ -60,23 +60,33 @@ Then(/^the game should be won$/) do
 end
 
 Given(/^a letter has already been guessed correctly$/) do
-  pending # express the regexp above with the code you wish you had
+  self.the_display = Display.new
+  self.lives = Lives.new(9)
+  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
+  self.the_guess = Guess.new('A')
+  hangman_game.guess(the_guess)
+
 end
 
 When(/^the player guesses that letter again$/) do
-  pending # express the regexp above with the code you wish you had
+  hangman_game.guess(the_guess)
 end
 
 Then(/^the player will not lose a life$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(lives.number_of_lives).to eq 9
 end
 
 Given(/^a letter has already been guessed incorrectly$/) do
-  pending # express the regexp above with the code you wish you had
+  self.the_display = Display.new
+  self.trash = Trash.new
+  self.lives = Lives.new(9)
+  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
+  self.the_guess = Guess.new('B')
+  hangman_game.guess(the_guess)
 end
 
 Then(/^the player will lose a life$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(lives.number_of_lives).to eq 7
 end
 
 World(Helper)

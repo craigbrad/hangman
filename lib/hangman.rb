@@ -32,6 +32,10 @@ class Game
   end
 end
 
+
+
+
+
 class Guess
   attr_reader :letter
 
@@ -39,6 +43,10 @@ class Guess
     @letter = letter
   end
 end
+
+
+
+
 
 class Trash
   attr_reader :guesses
@@ -48,7 +56,17 @@ class Trash
   def add(guess)
     @guesses << guess
   end
+  def display
+    used_letters = []
+    guesses.each do |guess|
+      used_letters << guess.letter
+    end
+    used_letters
+  end
 end
+
+
+
 
 class Display
   attr_reader :message
@@ -65,6 +83,10 @@ class Display
     @message = message
   end
 end
+
+
+
+
 
 class Lives
   attr_reader :number_of_lives
@@ -84,6 +106,10 @@ class Lives
     end
   end
 end
+
+
+
+
 
 class Answer
   attr_reader :letters
@@ -133,7 +159,7 @@ class Answer
     message.strip
   end
 
-
+  private
   class Letter
     attr_reader :letter, :is_revealed
 
@@ -147,6 +173,31 @@ class Answer
     end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module Helper
   def the_guess=(guess)
