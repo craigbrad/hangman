@@ -1,3 +1,5 @@
+require 'hangman'
+
 Given(/^a correct letter$/) do
   self.the_guess = Guess.new('A')
 end
@@ -42,15 +44,19 @@ Then(/^the game should be over$/) do
 end
 
 Given(/^there is only one letter left to guess$/) do
-  pending # express the regexp above with the code you wish you had
+  self.trash = Trash.new
+  self.lives = Lives.new(9)
+  self.the_display = Display.new
+  self.hangman_game = Game.new(the_display, 'A', trash, lives)
 end
 
 When(/^the player guesses the letter correctly$/) do
-  pending # express the regexp above with the code you wish you had
+  self.the_guess = Guess.new('A')
+  hangman_game.guess(the_guess)
 end
 
 Then(/^the game should be won$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(self.hangman_game.is_won).to be true
 end
 
 Given(/^a letter has already been guessed correctly$/) do
@@ -73,120 +79,4 @@ Then(/^the player will lose a life$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-class Guess
-  attr_reader :letter
-
-  def initialize(letter)
-    @letter = letter
-  end
-end
-
-class Game
-  attr_reader :answer, :display, :trash, :lives, :is_over
-
-  def initialize(display, answer, trash, lives)
-    @display = display
-    @answer = answer
-    @trash = trash
-    @lives = lives
-    @is_over = false
-  end
-
-  def guess(guess)
-    trash.add(guess)
-    lives.take_a_life
-    is_over?
-  end
-
-  private
-  def is_over?
-    if lives.no_lives?
-      @is_over = true
-    end
-  end
-end
-
-class Trash
-  attr_reader :guesses
-  def initialize
-    @guesses = []
-  end
-  def add(guess)
-    @guesses << guess
-  end
-end
-
-class Display
-  attr_reader :message
-  
-  def initialize
-    @message = "_ A _ _ _ A _"
-  end
-  
-  def message
-    @message
-  end
-end
-
-class Lives
-  attr_reader :number_of_lives
-  def initialize(lives)
-    @number_of_lives = lives
-  end
-
-  def take_a_life
-    @number_of_lives -= 1
-  end
-
-  def no_lives?
-    if @number_of_lives == 0
-      true
-    else
-      false
-    end
-  end
-end
-
-module Helper
-  def the_guess=(guess)
-    @the_guess = guess
-  end
-
-  def the_guess
-    @the_guess
-  end
-
-  def the_display=(display)
-    @the_display = display
-  end
-
-  def the_display
-    @the_display
-  end
-
-  def trash=(trash)
-    @trash = trash
-  end
-
-  def trash
-    @trash
-  end
-
-  def lives=(lives)
-    @lives = lives
-  end
-
-  def lives
-    @lives
-  end
-
-  def hangman_game=(game)
-    @hangman_game = game
-  end
-
-  def hangman_game
-    @hangman_game
-  end
-
-end
 World(Helper)
