@@ -10,6 +10,7 @@ RSpec.describe "A player of hangman" do
     guess = Guess.new('A')
     hangman_game.guess(guess)
     expect(display.message).to eq("_ A _ _ _ A _")
+    expect(lives.number_of_lives).to eq 9
   end
 
   it "can guess an incorrect letter" do

@@ -18,18 +18,16 @@ class Game
     else
       trash.add(guess)
       lives.take_a_life
-      is_over?
+      @is_over = lives.no_lives?
     end
   end
-
-  private
+  
   def is_over?
-    if lives.no_lives?
-      @is_over = true
-    end
+    @is_over
   end
 
   def is_won?
+    @is_won
   end
 end
 
@@ -37,7 +35,7 @@ class Guess
   attr_reader :letter
 
   def initialize(letter)
-    @letter = letter
+    @letter = letter.upcase
   end
 end
 

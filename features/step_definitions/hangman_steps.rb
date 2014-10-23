@@ -1,92 +1,117 @@
-require 'hangman'
+require 'capybara/cucumber'
+require 'sinatra'
+require 'hangman_interface'
+
+Capybara.app = Sinatra::Application
 
 Given(/^a correct letter$/) do
-  self.the_guess = Guess.new('A')
+  visit "/hangman"
 end
 
-When(/^the player guesses the letter$/) do
-  self.the_display = Display.new
-  self.trash = Trash.new
-  self.lives = Lives.new(9)
-  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
-  hangman_game.guess(the_guess)
+When(/^the player guesses the correct letter$/) do
+  fill_in("guess", :with => 'S')
+  click_button("submit")
 end
 
 Then(/^the letter should be revealed in the answer$/) do
-  expect(the_display.message).to eq("_ A _ _ _ A _") 
+  page.has_content?("S _ _ _ _ _ _ _ _ _ _ _ _") 
 end
 
 Given(/^an incorrect letter$/) do
-  self.the_guess = Guess.new('B')
+  visit "/hangman"
+end
+
+When(/^the player guesses the incorrect letter$/) do
+  fill_in("guess", :with => 'T')
+  click_button("submit")
 end
 
 Then(/^the letter should go into the trash$/) do
-  expect(trash.guesses.include?(self.the_guess)).to be(true) 
+  page.should have_content("[\"T\"]")
 end
 
 Then(/^the player should lose a life$/) do
-  expect(lives.number_of_lives).to eq 8
+  page.should have_content("Lives: 2")
 end
 
-Given(/^the player has one life left$/) do
-  self.lives = Lives.new(1)
+Given(/^the player has three lives left$/) do
+  visit "/hangman"
 end
 
-When(/^the player guesses incorrectly$/) do
-  self.the_guess = Guess.new('B')
-  self.trash = Trash.new
-  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
-  hangman_game.guess(the_guess)
+When(/^the player guesses incorrectly several times$/) do
+  fill_in("guess", :with => 'T')
+  click_button("submit")
+  fill_in("guess", :with => 'B')
+  click_button("submit")
+  fill_in("guess", :with => 'Z')
+  click_button("submit")
 end
 
 Then(/^the game should be over$/) do
-  expect(self.hangman_game.is_over).to be true
+ page.should have_content("UNLUCKY YOU HAVE LOST!")
 end
 
 Given(/^there is only one letter left to guess$/) do
-  self.trash = Trash.new
-  self.lives = Lives.new(9)
-  self.the_display = Display.new
-  self.hangman_game = Game.new(the_display, 'A', trash, lives)
+  visit "/hangman"
 end
 
 When(/^the player guesses the letter correctly$/) do
-  self.the_guess = Guess.new('A')
-  hangman_game.guess(the_guess)
+  fill_in("guess", :with => 'S')
+  click_button("submit")
+  fill_in("guess", :with => 'U')
+  click_button("submit")
+  fill_in("guess", :with => 'P')
+  click_button("submit")
+  fill_in("guess", :with => 'E')
+  click_button("submit")
+  fill_in("guess", :with => 'R')
+  click_button("submit")
+  fill_in("guess", :with => 'L')
+  click_button("submit")
+  fill_in("guess", :with => 'O')
+  click_button("submit")
+  fill_in("guess", :with => 'N')
+  click_button("submit")
+  fill_in("guess", :with => 'G')
+  click_button("submit")
+  fill_in("guess", :with => 'W')
+  click_button("submit")
+  fill_in("guess", :with => 'D')
+  click_button("submit")
 end
 
 Then(/^the game should be won$/) do
-  expect(self.hangman_game.is_won).to be true
+  page.should have_content("CONGRATULATIONS YOU HAVE WON!")
 end
 
 Given(/^a letter has already been guessed correctly$/) do
-  self.the_display = Display.new
-  self.lives = Lives.new(9)
-  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
-  self.the_guess = Guess.new('A')
-  hangman_game.guess(the_guess)
-
+  visit "/hangman"
+  fill_in("guess", :with => 'O')
+  click_button("submit")
 end
 
 When(/^the player guesses that letter again$/) do
-  hangman_game.guess(the_guess)
+  fill_in("guess", :with => 'O')
+  click_button("submit")
 end
 
 Then(/^the player will not lose a life$/) do
-  expect(lives.number_of_lives).to eq 9
+  page.should have_content("Lives: 3")
 end
 
 Given(/^a letter has already been guessed incorrectly$/) do
-  self.the_display = Display.new
-  self.trash = Trash.new
-  self.lives = Lives.new(9)
-  self.hangman_game = Game.new(the_display, 'HANGMAN', trash, lives)
-  self.the_guess = Guess.new('B')
-  hangman_game.guess(the_guess)
+  visit "/hangman"
+  fill_in("guess", :with => 'Z')
+  click_button("submit")
+end
+
+When(/^the player guesses the incorrect letter again$/) do
+  fill_in("guess", :with => 'Z')
+  click_button("submit")
 end
 
 Then(/^the player will lose a life$/) do
-  expect(lives.number_of_lives).to eq 7
+  page.should have_content("Lives: 1")
 end
 
-World(Helper)
+# World(Helper)
