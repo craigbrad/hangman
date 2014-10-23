@@ -8,6 +8,7 @@ class Game
     @lives = lives
     @is_over = false
     @is_won = false
+    @display.show(@answer.display)
   end
 
   def guess(guess)
@@ -32,10 +33,6 @@ class Game
   end
 end
 
-
-
-
-
 class Guess
   attr_reader :letter
 
@@ -43,10 +40,6 @@ class Guess
     @letter = letter
   end
 end
-
-
-
-
 
 class Trash
   attr_reader :guesses
