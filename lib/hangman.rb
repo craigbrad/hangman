@@ -47,17 +47,15 @@ class Trash
   def add(guess)
     @guesses << guess
   end
+
   def display
-    used_letters = []
+    used_letters = ""
     guesses.each do |guess|
-      used_letters << guess.letter
+      used_letters << guess.letter << ", "
     end
-    used_letters
+    used_letters.chomp(", ")
   end
 end
-
-
-
 
 class Display
   attr_reader :message
@@ -74,10 +72,6 @@ class Display
     @message = message
   end
 end
-
-
-
-
 
 class Lives
   attr_reader :number_of_lives
@@ -97,10 +91,6 @@ class Lives
     end
   end
 end
-
-
-
-
 
 class Answer
   attr_reader :letters
@@ -162,72 +152,5 @@ class Answer
     def reveal
       @is_revealed = true
     end
-  end
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module Helper
-  def the_guess=(guess)
-    @the_guess = guess
-  end
-
-  def the_guess
-    @the_guess
-  end
-
-  def the_display=(display)
-    @the_display = display
-  end
-
-  def the_display
-    @the_display
-  end
-
-  def trash=(trash)
-    @trash = trash
-  end
-
-  def trash
-    @trash
-  end
-
-  def lives=(lives)
-    @lives = lives
-  end
-
-  def lives
-    @lives
-  end
-
-  def hangman_game=(game)
-    @hangman_game = game
-  end
-
-  def hangman_game
-    @hangman_game
   end
 end
