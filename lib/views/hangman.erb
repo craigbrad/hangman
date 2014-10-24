@@ -1,0 +1,80 @@
+<!-- <html>
+  <head>
+  <title>Hangman</title>
+  </head>
+  <body>
+    <text id="answer"> <%= answer %> </text> <br/>
+    <form method="get" action="/guess">
+      <input type="text" name="guess"  maxlength="1"> <br/>
+      <input type="submit" id="submit" value="Guess!" > <br/>
+    </form>
+    <text id="lives"> Lives: <%= lives %> </text> <br/>
+    <text id="trash"> Trash: <%= trash %> </text> <br/>
+    <text id="error"> <%= error %> </text> <br/>
+  </body>
+</html> -->
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+
+    <title>Hangman web game!</title>
+  </head>
+  <body>
+
+    <div class="pageheader">
+
+    </div>
+
+    <div class="pagecontent">
+      <div class="left">
+        <span id="headertext">
+        <h1>WEB BASED HANGMAN GAME</h1>
+        </span>
+        <div id="pageintro">
+          <p>This hangman game was primarily developed in Ruby and Sinatra.<br/>
+            Simply enter a letter in the box below and click guess to see if the letter is in the word.<br/>
+            You have to guess the word before your lives are lost (or your man has been hung!).
+          </p>
+        </div>
+
+        <div>
+          <p class="answer"> <%= answer %> </p> <br/> 
+        </div>
+
+        <div class="formcontainer">
+          <form method="get" action="/guess">
+            <input type="text" name="guess" maxlength="1"><br/>
+            <input type="submit" id="submit" name="Guess!">
+          </form>
+        </div>
+
+
+
+        <div class="gamestatus">
+          <div class="lives">
+            <p>Lives: <%= lives %></p>
+          </div>
+          <div class="trash">
+            <p>Trash: <%= trash %></p> 
+          </div>
+        </div>
+        
+        <div class="error">
+          <p> <%= error %> </p>
+        </div>
+      </div>
+
+      <div class="right"> 
+        <img src="images/hangman_<%= lives %>.png" >
+      </div>
+    </div>
+
+    <div id="footer">
+    </div>
+
+  </body>
+</html>

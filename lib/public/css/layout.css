@@ -1,0 +1,47 @@
+body {
+  background-image:url('/img/footer_lodyas.png');
+}
+
+.error p {
+  color: red;
+  font-size: 200%;
+  padding-top: 5%;
+}
+
+p {
+  font-size: 100%;
+  color: white;
+}
+
+h1 {
+  color: orange;
+}
+
+.answer {
+  font-size: 400%;
+  padding-top: 20%;
+}
+
+.pageheader, .pagecontent {
+  text-align: center;
+}
+
+.left {
+  display: inline-block;
+  width:60%;
+}
+.right {
+  display: inline-block;
+  width:28%;
+  vertical-align: top;
+  padding-top: 5%;
+}
+
+.lives, .trash {
+  display: inline-block;
+  width:49%;
+  font-size: 200%;
+}
+
+
+

@@ -9,7 +9,7 @@ hangman_game = nil
 get '/hangman' do
   display = Display.new
   trash = Trash.new
-  lives = Lives.new(11)
+  lives = Lives.new(10)
   hangman_game = Game.new(display, "SUPERLONGWORD", trash, lives)
   errormessage = ""
   erb :'/hangman', :locals => {:answer => display.message, :error => errormessage, :lives => lives.number_of_lives, :trash => trash.display}
@@ -22,9 +22,9 @@ get '/guess' do
   if guess =~ /[A-Za-z]/
     hangman_game.guess(Guess.new(guess)) 
   elsif guess == ""
-    errormessage = "Please input something"
+    errormessage = "Please input something!"
   else
-    errormessage = "Invalid input only a-z"
+    errormessage = "Invalid input: A-Z Only!"
   end
 
   if hangman_game.is_won?
