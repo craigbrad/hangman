@@ -7,10 +7,11 @@ lives = nil
 hangman_game = nil 
 
 get '/hangman' do
+  puts Dir.pwd
   display = Display.new
   trash = Trash.new
   lives = Lives.new(10)
-  hangman_game = Game.new(display, "SUPERLONGWORD", trash, lives)
+  hangman_game = Game.new(display, trash, lives)
   errormessage = ""
   erb :'/hangman', :locals => {:answer => display.message, :error => errormessage, :lives => lives.number_of_lives, :trash => trash.display}
 end

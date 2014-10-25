@@ -47,8 +47,8 @@
 
         <div class="formcontainer">
           <form method="get" action="/guess">
-            <input type="text" name="guess" maxlength="1"><br/>
-            <input type="submit" id="submit" name="Guess!">
+            <input type="text" class="guess" name="guess" maxlength="1" autofocus><br/>
+            <input type="submit" id="submit" class="btn btn-default" name="Guess!">
           </form>
         </div>
 
@@ -62,14 +62,14 @@
             <p>Trash: <%= trash %></p> 
           </div>
         </div>
-        
+
         <div class="error">
           <p> <%= error %> </p>
         </div>
       </div>
 
       <div class="right"> 
-        <img src="images/hangman_<%= lives %>.png" >
+        <img class="image" src="images/hangman_<%= lives %>.png" >
       </div>
     </div>
 

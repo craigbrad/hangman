@@ -1,8 +1,19 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/complete.css" rel="stylesheet" >
     <title> Hangman - Congratulations! </title>
   </head>
   <body>
-    <text> CONGRATULATIONS YOU HAVE WON! </text>
+    <div class="header">
+    <h1> CONGRATULATIONS YOU HAVE WON! </h1>
+    </div>
+    <div class="formcontainer">
+      <form method="get" action="/hangman">
+        <input type="submit" id="newgame" class="btn btn-warning" value="New Game">
+      </form>
+    </div>
   </body>
 </html>

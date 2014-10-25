@@ -1,0 +1,13 @@
+body {
+  background-image:url('/img/footer_lodyas.png');
+  text-align: center;
+}
+
+.header {
+  color: white;
+  font-size: 400%;
+}
+
+h1 {
+  color: orange;
+}
