@@ -1,0 +1,44 @@
+body {
+  background-image:url('/img/footer_lodyas.png');
+  text-align: center;
+}
+
+h1 {
+  color: orange;
+}
+
+.header {
+  font-size: 400%;
+}
+
+.pods {
+  display: inline-block;
+  width: 100%;
+}
+
+.podA {
+  background-color: #FF9D00;
+  width: 15em;
+  height: 15em;
+  margin: 30px;
+  display: inline-block;
+  color: white;
+}
+
+.podB {
+  background-color: #FFC15E;
+  width: 15em;
+  height: 15em;
+  margin: 30px;
+  display: inline-block;
+  color: black;
+}
+
+p{
+  font-size: 150%;
+  padding-top: 43%;
+}
+
+h2 {
+  color: white;
+}

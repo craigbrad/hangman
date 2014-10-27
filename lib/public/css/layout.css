@@ -11,6 +11,7 @@ body {
 p {
   font-size: 100%;
   color: white;
+  line-height: 120%;
 }
 
 h1 {
@@ -28,6 +29,7 @@ h1 {
 
 .left {
   display: inline-block;
+  vertical-align: top;
   width:60%;
 }
 .right {
@@ -40,8 +42,10 @@ h1 {
 
 .lives, .trash {
   display: inline-block;
+  vertical-align: top;
   width:49%;
   font-size: 200%;
+
 }
 
 .image {

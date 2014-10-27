@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -9,8 +10,12 @@
     <div class="header">
       <h1> UNLUCKY YOU HAVE LOST! </h1>
     </div>
+    <br>
+    <div class="body">
+      <p> The answer was <%= answer %> </p>
+    </div>
     <div class="formcontainer">
-      <form method="get" action="/hangman">
+      <form method="get" action="/">
         <input type="submit" id="newgame" class="btn-default" value="New Game">
       </form>
     </div>

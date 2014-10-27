@@ -3,11 +3,33 @@ body {
   text-align: center;
 }
 
+h1 {
+  color: orange;
+}
+
 .header {
-  color: white;
   font-size: 400%;
 }
 
-h1 {
-  color: orange;
+.body {
+  color: white;
+}
+
+.submit{
+  width:120%;
+}
+
+.btn-default {
+  background:orange;
+  color:black;
+  border-radius:0;
+}
+
+.btn-default:hover {
+  background:orange;
+  color:white;
+}
+
+input[type=submit] {
+    width: 24%;
 }

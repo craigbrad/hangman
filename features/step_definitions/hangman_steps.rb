@@ -3,18 +3,20 @@ require 'sinatra'
 require 'hangman_interface'
 
 Capybara.app = Sinatra::Application
+Sinatra::Application::settings.environment = 'test'
+Sinatra::Application.set :root, "./lib"
 
 Given(/^a correct letter$/) do
   visit "/hangman"
 end
 
 When(/^the player guesses the correct letter$/) do
-  fill_in("guess", :with => 'S')
+  fill_in("guess", :with => 'H')
   click_button("submit")
 end
 
 Then(/^the letter should be revealed in the answer$/) do
-  page.has_content?("S _ _ _ _ _ _ _ _ _ _ _ _") 
+  page.has_content?("H _ _ _ _ _ _") 
 end
 
 Given(/^an incorrect letter$/) do
@@ -27,7 +29,7 @@ When(/^the player guesses the incorrect letter$/) do
 end
 
 Then(/^the letter should go into the trash$/) do
-  page.should have_content("[\"T\"]")
+  page.should have_content("")
 end
 
 Then(/^the player should lose a life$/) do
@@ -56,27 +58,15 @@ Given(/^there is only one letter left to guess$/) do
 end
 
 When(/^the player guesses the letter correctly$/) do
-  fill_in("guess", :with => 'S')
+  fill_in("guess", :with => 'H')
   click_button("submit")
-  fill_in("guess", :with => 'U')
-  click_button("submit")
-  fill_in("guess", :with => 'P')
-  click_button("submit")
-  fill_in("guess", :with => 'E')
-  click_button("submit")
-  fill_in("guess", :with => 'R')
-  click_button("submit")
-  fill_in("guess", :with => 'L')
-  click_button("submit")
-  fill_in("guess", :with => 'O')
+  fill_in("guess", :with => 'A')
   click_button("submit")
   fill_in("guess", :with => 'N')
   click_button("submit")
   fill_in("guess", :with => 'G')
   click_button("submit")
-  fill_in("guess", :with => 'W')
-  click_button("submit")
-  fill_in("guess", :with => 'D')
+  fill_in("guess", :with => 'M')
   click_button("submit")
 end
 
@@ -86,12 +76,12 @@ end
 
 Given(/^a letter has already been guessed correctly$/) do
   visit "/hangman"
-  fill_in("guess", :with => 'O')
+  fill_in("guess", :with => 'A')
   click_button("submit")
 end
 
 When(/^the player guesses that letter again$/) do
-  fill_in("guess", :with => 'O')
+  fill_in("guess", :with => 'A')
   click_button("submit")
 end
 

@@ -1,9 +1,9 @@
 class Game
   attr_reader :answer, :display, :trash, :lives, :is_over, :is_won
 
-  def initialize(display, trash, lives)
+  def initialize(display, trash, lives, filename = "words.txt")
     @display = display
-    @answer = Answer.new
+    @answer = Answer.new(filename)
     @trash = trash
     @lives = lives
     @is_over = false
@@ -20,6 +20,10 @@ class Game
       lives.take_a_life
       @is_over = lives.no_lives?
     end
+  end
+
+  def get_answer
+    @answer.get_answer
   end
   
   def is_over?
@@ -93,24 +97,25 @@ class Lives
 end
 
 class Answer
-  attr_reader :letters
+  attr_reader :letters, :answer
   
-  def initialize
-    @letters = generate_answer
+  def initialize(filename)
+    @letters = generate_answer(filename)
     letters.each do |letter|
       print letter.letter
     end
     puts
   end
 
-  def generate_answer
+  def generate_answer(filename)
     puts Dir.pwd
     words = []
-    f = File.open("words.txt", "r")
+    f = File.open(filename, "r")
     f.each do |line|
       words[words.count] = line
     end
-    split_answer(words.sample.strip.upcase)
+    @answer = words.sample.strip.upcase
+    split_answer(answer)
   end
 
 
@@ -153,6 +158,10 @@ class Answer
       end
     end
     message.strip
+  end
+
+  def get_answer
+    @answer
   end
 
   private

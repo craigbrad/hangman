@@ -1,12 +1,11 @@
 require 'hangman'
 
 RSpec.describe "A player of hangman" do
-
   it "can guess a correct letter" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(9)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     guess = Guess.new('A')
     hangman_game.guess(guess)
     expect(display.message).to eq("_ A _ _ _ A _")
@@ -17,7 +16,7 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(9)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     guess = Guess.new('B')
     hangman_game.guess(guess)
     expect(lives.number_of_lives).to eq 8
@@ -28,7 +27,7 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(1)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     guess = Guess.new('B')
     hangman_game.guess(guess)
     expect(hangman_game.is_over).to be true
@@ -38,7 +37,7 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(1)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     hangman_game.guess(Guess.new('G'))
     hangman_game.guess(Guess.new('A'))
     hangman_game.guess(Guess.new('N'))
@@ -49,7 +48,7 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(9)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     hangman_game.guess(Guess.new('Z')) 
     hangman_game.guess(Guess.new('W')) 
     hangman_game.guess(Guess.new('X')) 
@@ -60,7 +59,7 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(9)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     hangman_game.guess(Guess.new('A')) 
     hangman_game.guess(Guess.new('I')) 
     hangman_game.guess(Guess.new('E')) 
@@ -73,56 +72,54 @@ RSpec.describe "A player of hangman" do
     display = Display.new
     trash = Trash.new
     lives = Lives.new(9)
-    hangman_game = Game.new(display, "HANGMAN", trash, lives)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
     hangman_game.guess(Guess.new('I')) 
     hangman_game.guess(Guess.new('Y'))
-    expect(trash.display).to eq ['I','Y']
+    expect(trash.display).to eq "I, Y"
   end
 
   it "can play a full realistic game and lose" do
     display = Display.new
     trash = Trash.new
-    lives = Lives.new(7)
-    hangman_game = Game.new(display, "MANCHESTER", trash, lives)
-    hangman_game.guess(Guess.new('A')) 
-    hangman_game.guess(Guess.new('I')) 
-    hangman_game.guess(Guess.new('E')) 
-    hangman_game.guess(Guess.new('O'))
-    hangman_game.guess(Guess.new('U'))
+    lives = Lives.new(11)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
+    hangman_game.guess(Guess.new('A'))
+    hangman_game.guess(Guess.new('W'))
+    hangman_game.guess(Guess.new('F'))
+    hangman_game.guess(Guess.new('L'))
+    hangman_game.guess(Guess.new('R'))
+    hangman_game.guess(Guess.new('Q'))
+    hangman_game.guess(Guess.new('P'))
+    hangman_game.guess(Guess.new('D'))
+    hangman_game.guess(Guess.new('B'))
+    hangman_game.guess(Guess.new('C'))
     hangman_game.guess(Guess.new('J'))
-    hangman_game.guess(Guess.new('H'))
-    hangman_game.guess(Guess.new('S'))
-    hangman_game.guess(Guess.new('T'))
-    hangman_game.guess(Guess.new('Y'))
-    hangman_game.guess(Guess.new('X'))
-    hangman_game.guess(Guess.new('Z'))
+    hangman_game.guess(Guess.new('W'))
+
 
     expect(hangman_game.is_over).to be true
     expect(lives.number_of_lives).to eq 0
-    expect(trash.display).to eq ['I','O', 'U', 'J', 'Y', 'X', 'Z']
-    expect(display.message).to eq("_ A _ _ H E S T E _")
+    expect(trash.display).to eq "W, F, L, R, Q, P, D, B, C, J, W"
+    expect(display.message).to eq("_ A _ _ _ A _")
   end
 
   it "can play a full realitic game and win" do
     display = Display.new
     trash = Trash.new
-    lives = Lives.new(7)
-    hangman_game = Game.new(display, "MANCHESTER", trash, lives)
+    lives = Lives.new(11)
+    hangman_game = Game.new(display, trash, lives, "test.txt")
+    hangman_game.guess(Guess.new('H')) 
+    hangman_game.guess(Guess.new('O')) 
     hangman_game.guess(Guess.new('A')) 
-    hangman_game.guess(Guess.new('E')) 
-    hangman_game.guess(Guess.new('O'))
-    hangman_game.guess(Guess.new('H'))
-    hangman_game.guess(Guess.new('S'))
-    hangman_game.guess(Guess.new('T'))
-    hangman_game.guess(Guess.new('R'))
+    hangman_game.guess(Guess.new('N'))
+    hangman_game.guess(Guess.new('G'))
     hangman_game.guess(Guess.new('M'))
     hangman_game.guess(Guess.new('N'))
-    hangman_game.guess(Guess.new('C'))
 
 
     expect(hangman_game.is_won).to be true
-    expect(lives.number_of_lives).to eq 6
-    expect(trash.display).to eq ['O']
-    expect(display.message).to eq("M A N C H E S T E R")
+    expect(lives.number_of_lives).to eq 10
+    expect(trash.display).to eq 'O'
+    expect(display.message).to eq("H A N G M A N")
   end
 end
