@@ -124,10 +124,6 @@ get '/quit' do
   record = GameDB.last( :game_id => game_id )
   puts record.destroy.to_s.blue
 
-  #games.delete_at(game_id)
-  
-
-
   errormessage = ""
   greeting = ""
 
