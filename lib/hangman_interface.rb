@@ -60,7 +60,7 @@ post '/slack' do
   @token = params[:token]
   @user_name = params[:user_name]
   @text = params[:text]
-  
+  puts @text.to_s.red
   content_type :json
   { :text => slack_game.check_command(@text) }.to_json
 
