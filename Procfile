@@ -1,1 +1,1 @@
-web: bundle exec ruby lib/hangman_interface.rb -p $PORT
+web: ruby /lib/hangman_interface.rb -p $PORT
