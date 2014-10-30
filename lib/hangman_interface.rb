@@ -57,9 +57,9 @@ slack_game = Slack.new
 
 
 post '/slack' do
-  token = params[:token]
-  user_name = params[:user_name]
-  text = params[:text]
+  @token = params[:token]
+  @user_name = params[:user_name]
+  @text = params[:text]
   
   content_type :json
   { :text => slack_game.check_command(text) }.to_json
