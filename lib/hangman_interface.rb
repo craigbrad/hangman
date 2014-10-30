@@ -70,7 +70,7 @@ post '/slack' do
 
   #newgame
   #guess
-
+  #fkfs 
   #if new game - create game - return blanks
 
   #check if active game
