@@ -1,7 +1,7 @@
 require_relative './hangman'
 
 class Slack
-
+  attr_reader :game
   def check_command(message)
     user_input = parse_message(message)
     if user_input[1] == "newgame"
