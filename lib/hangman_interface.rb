@@ -4,6 +4,7 @@ require 'colorize'
 require "data_mapper"
 require 'ruby-dictionary'
 
+require_relative 'slack'
 require_relative 'hangman'
 
 set :bind, '0.0.0.0' 
@@ -47,10 +48,38 @@ end
 DataMapper.finalize
 DataMapper.auto_migrate! 
 
+slack_game = Slack.new
 
 get '/' do
   erb :'/home'
 end
+
+
+get '/slack' do
+  token = params[:token]
+  user_name = params[:user_name]
+  text = params[:text]
+  
+  '{ "text": "' + slack_game.check_command(text) + '" }'
+
+
+  #check for valid token
+
+  #check text for command
+
+  #newgame
+  #guess
+
+  #if new game - create game - return blanks
+
+  #check if active game
+  #if game is active check guess
+  #if valid guess return updated blanks
+  #if invalid return error message
+
+end
+
+
 
 get '/hangman' do
   category = params[:category]

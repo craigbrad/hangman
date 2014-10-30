@@ -10,8 +10,10 @@ class Answer
 
   def generate_answer(filename)
     words = []
+    puts Dir.pwd.to_s.red
     if filename.include? ".txt"
-      f = File.open(filename, "r")
+      file_name = Dir.pwd + "/" + filename
+      f = File.open(file_name, "r")
       f.each do |line|
         words[words.count] = line
       end

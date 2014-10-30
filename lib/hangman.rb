@@ -5,7 +5,7 @@ require 'colorize'
 class Game
   attr_reader :answer, :display, :trash, :lives, :is_over, :is_won
 
-  def initialize(display, trash, lives, filename = "words.txt", category)
+  def initialize(display, trash, lives, filename = "dictionary.txt", category)
     @display = display
     @answer = Answer.new(filename)
     @trash = trash
