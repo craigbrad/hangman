@@ -55,7 +55,7 @@ slack_game = Slack.new
 # end
 
 
-get '/slack' do
+post '/slack' do
   token = params[:token]
   user_name = params[:user_name]
   text = params[:text]
