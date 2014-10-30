@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'colorize'
 #require "data_mapper"
 require 'ruby-dictionary'
+require 'json'
 
 require_relative 'slack'
 require_relative 'hangman'
