@@ -5,7 +5,6 @@ body {
 .error p {
   color: red;
   font-size: 200%;
-  padding-top: 5%;
 }
 
 p {
@@ -16,6 +15,10 @@ p {
 
 h1 {
   color: orange;
+}
+
+h2 {
+  color: white;
 }
 
 .answer {
@@ -61,6 +64,10 @@ h1 {
 
 .submit{
   width:120%;
+}
+
+.giveup {
+  padding-top: 5%;
 }
 
 .btn-default {

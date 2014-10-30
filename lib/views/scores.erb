@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/complete.css" rel="stylesheet" >
+    <title> Hangman - No games! </title>
+  </head>
+  <body>
+    <div class="header">
+      <h1> Scores </h1>
+    </div>
+    <div class="body">
+    <div class="left" >
+    <h2> Your Scores </h2>
+      <% players.each do |game| %>
+        <p> The word <%= game.answer %> was guessed with <%= game.lives %> lives remaining by <%= game.challenger %> </p> <br/>
+      <% end %>
+    </div>
+    <div class="right">
+      <h2> Challengers Scores </h2>
+      <% challengers.each do |game| %>
+        <p> The word <%= game.answer %> was guessed with <%= game.lives %> lives remaining by <%= game.challenger %> </p> <br/>
+      <% end %>
+      <br/><br/>
+      <h2> Not Yet Played </h2>
+      <% unplayed.each do |game| %>
+        <p> You word <%= game %> has not been guessed yet</p> <br/>
+      <% end %>
+    </div>
+    
+    <div>
+    <div class="formcontainer">
+      <form method="get" action="/">
+        <input type="submit" id="newgame" class="btn-default" value="Go Home">
+      </form>
+    </div>
+  </body>
+</html>

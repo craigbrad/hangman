@@ -1,0 +1,49 @@
+body {
+  background-image:url('/img/footer_lodyas.png');
+  text-align: center;
+}
+
+h1 {
+  color: orange;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+input[type=submit] {
+    width: 80%;
+}
+
+.btn-default {
+  background:orange;
+  color:black;
+  border-radius:0;
+}
+
+.btn-default:hover {
+  background:orange;
+  color:white;
+}
+
+p {
+  font-size: 100%;
+  color: white;
+  line-height: 120%;
+}
+
+.answer, .category, .lives, .options {
+  vertical-align: top;
+  display: inline-block;
+  width: 24%;
+  float: left;
+}
+
+.unfinished_form {
+  display: inline-block;
+  width: 49%;
+}

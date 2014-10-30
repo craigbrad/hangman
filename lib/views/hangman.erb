@@ -34,13 +34,7 @@
         <span id="headertext">
         <h1>WEB BASED HANGMAN GAME</h1>
         </span>
-        <div id="pageintro">
-          <p>This hangman game was primarily developed in Ruby and Sinatra.<br/>
-            Simply enter a letter in the box below and click guess to see if the letter is in the word.<br/>
-            You have to guess the word before your lives are lost (or your man has been hung!).
-          </p>
-        </div>
-
+          <h2> <%= greeting %> </h2>
         <div>
           <p class="answer"> <%= answer %> </p> <br/> 
         </div>
@@ -48,11 +42,9 @@
         <div class="formcontainer">
           <form method="get" action="/guess">
             <input type="text" id="guess" class="guess" name="guess" maxlength="1" autofocus><br/>
-            <input type="submit" id="submit" class="btn btn-default" name="Guess!">
+            <input type="submit" id="submit" class="btn btn-default" value="Guess!">
           </form>
         </div>
-
-
 
         <div class="gamestatus">
           <div class="lives">
@@ -66,10 +58,21 @@
         <div class="error">
           <p> <%= error %> </p>
         </div>
+        <div id="pageintro">
+          <p>This hangman game was primarily developed in Ruby and Sinatra.<br/>
+            Simply enter a letter in the box below and click guess to see if the letter is in the word.<br/>
+            You have to guess the word before your lives are lost (or your man has been hung!).
+          </p>
+        </div>
       </div>
 
       <div class="right"> 
         <img class="image" src="images/hangman_<%= lives %>.png" >
+        <div class="giveup" >
+          <form method="get" action="/">
+              <input type="submit" id="giveup" class="btn btn-default" value="Give Up!">
+          </form>
+        </div>
       </div>
     </div>
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/complete.css" rel="stylesheet" >
+    <title> Hangman </title>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1> HANGMAN </h1>
+    </div> 
+    <div class="desc" >
+      <h2> You're new here, please enter your name! </h2>
+    </div>
+    <div class="error">
+      <p> <%= error %> </p>
+    </div>
+    <div class="form_container">
+      <form method="get" action="/multiplayer">
+         <input type="text" id="name" class="name" name="name" maxlength="25" autofocus><br/>
+        <input type="submit" id="name" class="btn-default" value="Enter">
+      </form>
+    </div>
+    
+  </body>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/unfinished.css" rel="stylesheet" >
+    <title> Hangman </title>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1> HANGMAN </h1>
+    </div> 
+    <div class="unfinished" >
+      <h2> Your unfinished games! </h2>
+      <div class="answer" >
+          <h3>Answer</h3> 
+        </div>
+        <div class="category">
+          <h3>Category</h3>
+        </div>
+        <div class="lives">
+          <h3>Lives</h3>
+        </div>
+        <div class="options">
+          <h3>Options</h3>
+        </div>
+      <% records.each do |record| %>
+        <div class="answer" >
+          <p> <%= record.game.answer.display %> </p> 
+        </div>
+        <div class="category">
+          <p> <%= record.game.category %> </p>
+        </div>
+        <div class="lives">
+          <p> <%= record.game.lives.number_of_lives %> </p>
+        </div>
+        <div class="options">
+          <form method="get" action="/resume" class="unfinished_form">
+            <input type="hidden" id='game_id' name='game_id' value=<%= record.game_id %> />
+            <input type="submit" class="btn-default" value="Resume"/>
+          </form>
+          <form method="get" action="/quit" class="unfinished_form">
+            <input type="hidden" id='game_id' name='game_id' value=<%= record.game_id %> />
+            <input type="submit" class="btn-default" value="Quit"/>
+          </form>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

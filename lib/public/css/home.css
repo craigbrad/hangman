@@ -17,6 +17,7 @@ h1 {
 }
 
 .podA {
+  vertical-align: top;
   background-color: #FF9D00;
   width: 15em;
   height: 15em;
@@ -26,12 +27,21 @@ h1 {
 }
 
 .podB {
+  vertical-align: top;
   background-color: #FFC15E;
   width: 15em;
   height: 15em;
   margin: 30px;
   display: inline-block;
   color: black;
+}
+
+.podBlank {
+  width: 15em;
+  height: 15em;
+  margin: 30px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 p{
