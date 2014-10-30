@@ -4,12 +4,12 @@ class Slack
 
   def check_command(message)
     user_input = parse_message(message)
-    if user_input[0] == "newgame"
+    if user_input[1] == "newgame"
       new_game
       @game.display.message
-    elsif user_input[0] == "guess"
-      if user_input[1] =~ /^[A-Za-z]{1}$/
-        @game.guess(Guess.new(user_input[1]))
+    elsif user_input[1] == "guess"
+      if user_input[2] =~ /^[A-Za-z]{1}$/
+        @game.guess(Guess.new(user_input[2]))
         @game.display.message
       else
         "invalid input"
@@ -31,6 +31,6 @@ class Slack
 
   private
   def parse_message(message)
-    message.split(' ', 2)
+    message.split(' ', 3)
   end
 end
