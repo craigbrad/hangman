@@ -1,36 +1,58 @@
 require_relative './hangman'
 
 class Slack
+  attr_accessor :games
 
-  def check_command(message)
+  def initialize
+    @games = {}
+  end
+
+  def check_command(message, channel_id)
+    channel_id = channel_id.to_sym
     user_input = parse_message(message)
-    if user_input[0] == "newgame"
-      new_game
-      @game.display.message
-    elsif user_input[0] == "guess"
-      if user_input[1] =~ /^[A-Za-z]{1}$/
-        @game.guess(Guess.new(user_input[1]))
-        @game.display.message
+    if user_input[1] == "newgame"
+      message = new_game(channel_id)
+    elsif user_input[1] == "guess"
+      if user_input[2] =~ /^[A-Za-z]{1}$/
+        message = check_guess(channel_id, user_input[2])
+        if @games[channel_id].is_won?
+          message = "Congrats, you guessed " + @games[channel_id].get_answer + " correctly!"
+          @games[channel_id] = nil
+        elsif @games[channel_id].is_over?
+          message = "Unlucky, the word was " + @games[channel_id].get_answer
+          @games[channel_id] = nil
+        end
+        message 
       else
-        "invalid input"
+        "Invalid input"
       end
+    elsif user_input[1] == "help"
+      "*hangman newgame* - Allows you to start a new game\n*hangman guess 'your guess'* - Allows you to make a guess"
     else
-      "no valid command entered"
+      "No valid command entered, try typing 'hangman help' for a list of commands"
     end
   end
 
-  def new_game
+  def new_game(channel_id)
     display = Display.new
     trash = Trash.new
     lives = Lives.new(10)
-    @game = Game.new(display, trash, lives, "slack")
+    @games[channel_id] = Game.new(display, trash, lives, "dictionary.txt",  "slack")
+    puts @games.inspect.to_s.red
+    @games[channel_id].display.message + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
   end
 
-  def check_guess
+  def reset(channel_id)
+    @games[channel_id] = nil
+  end
+
+  def check_guess(channel_id, user_input)
+    @games[channel_id].guess(Guess.new(user_input))
+    @games[channel_id].display.message + "\nTrash:" + @games[channel_id].trash.display + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
   end
 
   private
   def parse_message(message)
-    message.split(' ', 2)
+    message.split(' ', 3)
   end
 end

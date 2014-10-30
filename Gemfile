@@ -9,6 +9,11 @@ gem 'rack'
 gem 'shotgun' # for live code reloading
 gem 'colorize'
 gem 'json'
-# gem "data_mapper"
-# gem "dm-sqlite-adapter"
+gem "data_mapper"
+
+group :production do
+    gem "pg"
+    gem "dm-postgres-adapter"
+end
+
 gem 'ruby-dictionary'
