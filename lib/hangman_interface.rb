@@ -60,8 +60,8 @@ get '/slack' do
   user_name = params[:user_name]
   text = params[:text]
   
-  '{ "text": "' + slack_game.check_command(text) + '" }'
-
+  content_type :json
+  { :text => slack_game.check_command(text) }.to_json
 
   #check for valid token
 
