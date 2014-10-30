@@ -65,6 +65,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber
+  rack
   rspec
   ruby-dictionary
   sinatra

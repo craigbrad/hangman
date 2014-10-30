@@ -5,6 +5,7 @@ gem "sinatra-reloader"
 gem "capybara"
 gem "cucumber"
 gem "rspec"
+gem 'rack'
 # gem "data_mapper"
 # gem "dm-sqlite-adapter"
 gem 'ruby-dictionary'
