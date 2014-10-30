@@ -62,7 +62,7 @@ post '/slack' do
   @text = params[:text]
   @text = @text.sub('/hangman /', '')
   content_type :json
-  { :text => slack_game.check_command(@text) + "£" + @text }.to_json
+  { :text => slack_game.check_command(@text) + "----" + @text }.to_json
 
   #check for valid token
 
