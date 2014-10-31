@@ -97,7 +97,7 @@ get '/hangman' do
   end
 
   games[games.size] = hangman_game
-  game = GameDB.newf
+  game = GameDB.new
   hangman_game_id = games.size - 1
   game.game_id = hangman_game_id
   game.player_id = session[:id]
