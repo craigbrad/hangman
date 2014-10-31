@@ -10,12 +10,10 @@ class Slack
   def check_command(message, channel_id)
     user_input = parse_message(message)
     if user_input[1] == "newgame"
-      new_game(channel_id)
-      @games[channel_id].display.message + "\nLives: " + @game.lives.number_of_lives.to_s
+      message = new_game(channel_id)
     elsif user_input[1] == "guess"
       if user_input[2] =~ /^[A-Za-z]{1}$/
-        @games[channel_id].guess(Guess.new(user_input[2]))
-        message = @games[channel_id].display.message + "\nTrash:" + @games[channel_id].trash.display + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
+        message = check_guess(channel_id)
         if @games[channel_id].is_won?
           message = "Congrats, you guessed " + @games[channel_id].get_answer + " correctly!"
           @games[channel_id] = nil
@@ -38,14 +36,17 @@ class Slack
     display = Display.new
     trash = Trash.new
     lives = Lives.new(10)
-    @games[channel_id] ||= Game.new(display, trash, lives, "dictionary.txt",  "slack")
+    @games[channel_id] = Game.new(display, trash, lives, "dictionary.txt",  "slack")
+    @games[channel_id].display.message + "\nLives: " + @game.lives.number_of_lives.to_s
   end
 
   def reset(channel_id)
     @games[channel_id] = nil
   end
 
-  def check_guess
+  def check_guess(channel_id)
+    @games[channel_id].guess(Guess.new(user_input[2]))
+    @games[channel_id].display.message + "\nTrash:" + @games[channel_id].trash.display + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
   end
 
   private
