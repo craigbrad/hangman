@@ -77,7 +77,12 @@ post '/slack' do
       { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
       slack_game.game = nil
     end
+  else
+    content_type :json
+    { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
+    slack_game.game = nil
   end
+  
 
 
   #check for valid token
