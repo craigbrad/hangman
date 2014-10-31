@@ -58,7 +58,7 @@ class Answer
       if letter.is_revealed
         message << letter.letter << " "
       else
-        message << "_" << " "
+        message << "*" << " "
       end
     end
     message.strip
