@@ -1,7 +1,7 @@
 require_relative './hangman'
 
 class Slack
-  attr_reader :games
+  attr_accessor :games
 
   def initialize
     games = {}
