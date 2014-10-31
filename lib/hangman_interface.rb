@@ -67,7 +67,7 @@ post '/slack' do
     { :text => "Please type *hangman newgame* to start", :username => "Hangman HelpBot" }.to_json
   else
     content_type :json
-    { :text => slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s }.to_json
+    { :text => slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s, :username => "Hangman" }.to_json
   end
 
   #check for valid token
