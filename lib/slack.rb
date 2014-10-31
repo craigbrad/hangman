@@ -18,7 +18,7 @@ class Slack
         if @games[channel_id].is_won?
           message = "Congrats, you guessed " + @games[channel_id].get_answer + " correctly!"
           @games[channel_id] = nil
-        elsif @game[channel_id].is_over?
+        elsif @games[channel_id].is_over?
           message = "Unlucky, the word was " + @games[channel_id].get_answer
           @games[channel_id] = nil
         end
