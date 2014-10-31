@@ -62,7 +62,7 @@ post '/slack' do
   @user_name = params[:user_name]
   @text = params[:text]
   content_type :json
-  { :text => slack_game.check_command(@text) + "\ntrash: " + slack_game.game.trash.display + "\nlives: " + slack_game.game.lives.number_of_lives }.to_json
+  { :text => slack_game.check_command(@text) + "\ntrash: " + slack_game.game.trash.display + "\nlives: " + slack_game.game.lives.number_of_lives.to_s }.to_json
 
   #check for valid token
 
