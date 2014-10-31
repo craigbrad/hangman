@@ -11,9 +11,10 @@ require_relative 'hangman'
 set :bind, '0.0.0.0' 
 set :logging, false
 
-# path = "sqlite://#{Dir.pwd}/games.db"
+path = "://#{Dir.pwd}/games.db"
 
-# DataMapper.setup(:default, path)
+DataMapper.setup(:default, DataMapper::setup(:default, ENV['DATABASE_URL'] || path)
+
 enable :sessions
 set :session_secret, 'super secret'
 
@@ -25,29 +26,29 @@ before do
   session[:id] ||= SecureRandom.uuid
 end
 
-# class GameDB 
-#   include DataMapper::Resource
+class GameDB 
+  include DataMapper::Resource
 
-#   property :id, Serial
-#   property :game_id, Integer, :required => true
-#   property :player_id, String, :required => true
-#   property :active, Boolean, :default => false
-#   property :score, Integer, :default => 0
-#   property :finished, Boolean, :default  => false
-#   property :challenger_id, String, :default => ""
-# end
+  property :id, Serial
+  property :game_id, Integer, :required => true
+  property :player_id, String, :required => true
+  property :active, Boolean, :default => false
+  property :score, Integer, :default => 0
+  property :finished, Boolean, :default  => false
+  property :challenger_id, String, :default => ""
+end
 
-# class PlayerDB 
-#   include DataMapper::Resource
+class PlayerDB 
+  include DataMapper::Resource
 
-#   property :id, Serial
-#   property :player_id, String, :required => true, :unique => true
-#   property :player_name, String, :required => true, :default => ""  
-# end
+  property :id, Serial
+  property :player_id, String, :required => true, :unique => true
+  property :player_name, String, :required => true, :default => ""  
+end
 
 
-# DataMapper.finalize
-# DataMapper.auto_migrate! 
+DataMapper.finalize
+DataMapper.auto_migrate! 
 
 slack_game = Slack.new
 
