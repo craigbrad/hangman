@@ -76,10 +76,9 @@ post '/slack' do
       message = slack_game.check_command(@text)
       slack_game.reset
     end
-    content_type :json 
-    { :text => message, :username => "Hangman" }.to_json
   end
-  
+  content_type :json 
+  { :text => message, :username => "Hangman" }.to_json
 
 
   #check for valid token
