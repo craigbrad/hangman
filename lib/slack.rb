@@ -4,7 +4,7 @@ class Slack
   attr_accessor :games
 
   def initialize
-    games = {}
+    @games = {}
   end
 
   def check_command(message, channel_id)
