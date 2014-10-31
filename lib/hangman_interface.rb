@@ -75,12 +75,8 @@ post '/slack' do
     else
       content_type :json
       { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
-      slack_game.game = nil
+      slack_game.reset
     end
-  else
-    content_type :json
-    { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
-    slack_game.game = nil
   end
   
 

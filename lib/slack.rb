@@ -35,6 +35,10 @@ class Slack
     @game = Game.new(display, trash, lives, "wordlist.txt",  "slack")
   end
 
+  def reset
+    @game = nil
+  end
+
   def check_guess
   end
 
