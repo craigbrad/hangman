@@ -14,7 +14,7 @@ class Slack
       message = new_game(channel_id)
     elsif user_input[1] == "guess"
       if user_input[2] =~ /^[A-Za-z]{1}$/
-        message = check_guess(channel_id)
+        message = check_guess(channel_id, user_input[2])
         if @games[channel_id].is_won?
           message = "Congrats, you guessed " + @games[channel_id].get_answer + " correctly!"
           @games[channel_id] = nil
@@ -46,8 +46,8 @@ class Slack
     @games[channel_id] = nil
   end
 
-  def check_guess(channel_id)
-    @games[channel_id].guess(Guess.new(user_input[2]))
+  def check_guess(channel_id, user_input)
+    @games[channel_id].guess(Guess.new(user_input))
     @games[channel_id].display.message + "\nTrash:" + @games[channel_id].trash.display + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
   end
 
