@@ -66,19 +66,26 @@ post '/slack' do
   if slack_game.game == nil && @text != "hangman newgame"
     content_type :json
     { :text => "Please type *hangman newgame* to start", :username => "Hangman HelpBot" }.to_json
+  
+
   elsif @text == "hangman newgame"
     message = slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s
+    content_type :json 
+    { :text => message, :username => "Hangman" }.to_json
+
   elsif slack_game.game != nil 
     if !slack_game.game.is_won? && !slack_game.game.is_over?
       message = slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s
     end
+   
     if slack_game.game.is_won? || slack_game.game.is_over?
       message = slack_game.check_command(@text)
       slack_game.reset
     end
-  end
-  content_type :json 
+    content_type :json 
   { :text => message, :username => "Hangman" }.to_json
+  end
+  
 
 
   #check for valid token
