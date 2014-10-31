@@ -14,10 +14,8 @@ class Slack
         message = @game.display.message
         if @game.is_won?
           message = "Congrats, you guessed " + @game.get_answer + " correctly!"
-          @game = nil
         elsif @game.is_over?
           message = "Unlucky, the word was " + @game.get_answer
-          @game = nil
         end
         message 
       else
