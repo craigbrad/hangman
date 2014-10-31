@@ -51,9 +51,9 @@ end
 
 slack_game = Slack.new
 
-# get '/' do
-#   erb :'/home'
-# end
+get '/' do
+  erb :'/home'
+end
 
 
 post '/slack' do
