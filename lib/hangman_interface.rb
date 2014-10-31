@@ -64,7 +64,7 @@ post '/slack' do
   @channel_id = params[:channel_id]
   message = ""
 
-  if slack_game.games[channel_id] == nil && @text != "hangman newgame"
+  if slack_game.games[@channel_id] == nil && @text != "hangman newgame"
     content_type :json
     { :text => "Please type *hangman newgame* to start", :username => "Hangman HelpBot" }.to_json
   else
