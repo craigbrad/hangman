@@ -15,8 +15,10 @@ class Slack
       else
         "invalid input"
       end
+    elsif user_input[1] == "help"
+      "*hangman newgame* - Allows you to start a new game\n*hangman guess 'your guess'* - Allows you to make a guess"
     else
-      "no valid command entered"
+      "no valid command entered, try typing 'hangman help' for a list of commands"
     end
   end
 
