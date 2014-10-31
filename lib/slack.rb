@@ -34,7 +34,7 @@ class Slack
     display = Display.new
     trash = Trash.new
     lives = Lives.new(10)
-    @game = Game.new(display, trash, lives, "wordlist.txt",  "slack")
+    @game ||= Game.new(display, trash, lives, "dictionary.txt",  "slack")
   end
 
   def reset
