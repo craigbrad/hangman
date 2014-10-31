@@ -10,11 +10,14 @@ gem 'shotgun' # for live code reloading
 gem 'colorize'
 gem 'json'
 gem "data_mapper"
-group :development do
-  gem 'dm-sqlite-adapter'
+
+group :production do
+    gem "pg"
+    gem "dm-postgres-adapter"
 end
 
 group :production do
   gem 'dm-postgres-adapter'
 end
+
 gem 'ruby-dictionary'
