@@ -65,7 +65,7 @@ post '/slack' do
   if slack_game.game == nil && @text != "hangman newgame"
     content_type :json
     { :text => "Please type *hangman newgame* to start", :username => "Hangman HelpBot" }.to_json
-  elsif (slack_game.game.is_won? || slack_game.game.is_over?) && slack_game != nil
+  elsif slack_game != nil && (slack_game.game.is_won? || slack_game.game.is_over?) 
     content_type :json
     { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
   else
