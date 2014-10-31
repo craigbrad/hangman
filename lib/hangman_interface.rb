@@ -13,7 +13,7 @@ set :logging, false
 
 path = "://#{Dir.pwd}/games.db"
 
-DataMapper.setup(:default, DataMapper::setup(:default, ENV['HEROKU_POSTGRESQL_CYAN_URL'] || path))
+DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_CYAN_URL'] || path) 
 
 enable :sessions
 set :session_secret, 'super secret'
