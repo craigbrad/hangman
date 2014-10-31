@@ -63,7 +63,7 @@ post '/slack' do
   @text = params[:text]
   content_type :json
   if slack_game.game == nil
-    { :text => "Please type *hangman newgame* to start", :user_name => "Hangman HelpBot" }
+    { :text => "Please type *hangman newgame* to start", :user_name => "Hangman HelpBot" }.to_json
   else
     { :text => slack_game.check_command(@text) + "\ntrash: " + slack_game.game.trash.display + "\nlives: " + slack_game.game.lives.number_of_lives.to_s }.to_json
   end
