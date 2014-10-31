@@ -1,23 +1,27 @@
 require_relative './hangman'
 
 class Slack
-  attr_reader :game
+  attr_reader :games
 
-  def check_command(message)
+  def initialize
+    games = {}
+  end
+
+  def check_command(message, channel_id)
     user_input = parse_message(message)
     if user_input[1] == "newgame"
-      new_game
-      @game.display.message + "\nLives: " + @game.lives.number_of_lives.to_s
+      new_game(channel_id)
+      @games[channel_id].display.message + "\nLives: " + @game.lives.number_of_lives.to_s
     elsif user_input[1] == "guess"
       if user_input[2] =~ /^[A-Za-z]{1}$/
-        @game.guess(Guess.new(user_input[2]))
-        message = @game.display.message + "\nTrash:" + @game.trash.display + "\nLives: " + @game.lives.number_of_lives.to_s
-        if @game.is_won?
-          message = "Congrats, you guessed " + @game.get_answer + " correctly!"
-          @game = nil
-        elsif @game.is_over?
-          message = "Unlucky, the word was " + @game.get_answer
-          @game = nil
+        @games[channel_id].guess(Guess.new(user_input[2]))
+        message = @games[channel_id].display.message + "\nTrash:" + @games[channel_id].trash.display + "\nLives: " + @games[channel_id].lives.number_of_lives.to_s
+        if @games[channel_id].is_won?
+          message = "Congrats, you guessed " + @games[channel_id].get_answer + " correctly!"
+          @games[channel_id] = nil
+        elsif @game[channel_id].is_over?
+          message = "Unlucky, the word was " + @games[channel_id].get_answer
+          @games[channel_id] = nil
         end
         message 
       else
@@ -30,15 +34,15 @@ class Slack
     end
   end
 
-  def new_game
+  def new_game(channel_id)
     display = Display.new
     trash = Trash.new
     lives = Lives.new(10)
-    @game ||= Game.new(display, trash, lives, "dictionary.txt",  "slack")
+    @games[channel_id] ||= Game.new(display, trash, lives, "dictionary.txt",  "slack")
   end
 
-  def reset
-    @game = nil
+  def reset(channel_id)
+    @games[channel_id] = nil
   end
 
   def check_guess
