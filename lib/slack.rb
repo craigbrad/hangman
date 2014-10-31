@@ -11,7 +11,7 @@ class Slack
     elsif user_input[1] == "guess"
       if user_input[2] =~ /^[A-Za-z]{1}$/
         @game.guess(Guess.new(user_input[2]))
-        message = @game.display.message + "Trash:" + @game.trash.display + "\nLives: " + @game.lives.number_of_lives.to_s
+        message = @game.display.message + "\nTrash:" + @game.trash.display + "\nLives: " + @game.lives.number_of_lives.to_s
         if @game.is_won?
           message = "Congrats, you guessed " + @game.get_answer + " correctly!"
           @game = nil
