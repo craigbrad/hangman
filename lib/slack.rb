@@ -11,11 +11,6 @@ class Slack
     elsif user_input[1] == "guess"
       if user_input[2] =~ /^[A-Za-z]{1}$/
         @game.guess(Guess.new(user_input[2]))
-        if game.is_won?
-          "Congrats, you guessed " + game.get_answer + "correctly!"
-        elsif game.is_lost?
-
-        end
         @game.display.message
       else
         "Invalid input"
