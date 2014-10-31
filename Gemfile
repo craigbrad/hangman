@@ -16,8 +16,4 @@ group :production do
     gem "dm-postgres-adapter"
 end
 
-group :production do
-  gem 'dm-postgres-adapter'
-end
-
 gem 'ruby-dictionary'

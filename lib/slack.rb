@@ -8,6 +8,7 @@ class Slack
   end
 
   def check_command(message, channel_id)
+    channel_id = channel_id.to_sym
     user_input = parse_message(message)
     if user_input[1] == "newgame"
       message = new_game(channel_id)
