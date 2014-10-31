@@ -61,23 +61,23 @@ post '/slack' do
   @token = params[:token]
   @user_name = params[:user_name]
   @text = params[:text]
-  
+  message = ""
+
   if slack_game.game == nil && @text != "hangman newgame"
     content_type :json
     { :text => "Please type *hangman newgame* to start", :username => "Hangman HelpBot" }.to_json
   elsif @text == "hangman newgame"
-    content_type :json
-      { :text => slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s, :username => "Hangman" }.to_json
+    message = slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s
   elsif slack_game.game != nil 
     if !slack_game.game.is_won? && !slack_game.game.is_over?
-      content_type :json
-      { :text => slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s, :username => "Hangman" }.to_json
+      message = slack_game.check_command(@text) + "\nTrash: " + slack_game.game.trash.display + "\nLives: " + slack_game.game.lives.number_of_lives.to_s
     end
     if slack_game.game.is_won? || slack_game.game.is_over?
-      content_type :json
-      { :text => slack_game.check_command(@text), :username => "Hangman" }.to_json
+      message = slack_game.check_command(@text)
       slack_game.reset
     end
+    content_type :json 
+    { :text => message, :username => "Hangman" }.to_json
   end
   
 
