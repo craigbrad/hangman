@@ -37,6 +37,7 @@ class Slack
     trash = Trash.new
     lives = Lives.new(10)
     @games[channel_id] = Game.new(display, trash, lives, "dictionary.txt",  "slack")
+    puts @games.inspect.to_s.red
     @games[channel_id].display.message + "\nLives: " + @game.lives.number_of_lives.to_s
   end
 
