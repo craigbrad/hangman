@@ -72,23 +72,6 @@ post '/slack' do
     content_type :json 
     { :text => message, :username => "Hangman" }.to_json
   end
-  
-
-
-  #check for valid token
-
-  #check text for command
-
-  #newgame
-  #guess
-  #fkfs 
-  #if new game - create game - return blanks
-
-  #check if active game
-  #if game is active check guess
-  #if valid guess return updated blanks
-  #if invalid return error message
-
 end
 
 
@@ -136,7 +119,6 @@ get '/unfinished' do
   game_struct = Struct.new(:game_id, :game)
   unfinished_games.each do |game|
     game_s = game_struct.new(game.game_id, games[game.game_id])
-    puts game_s.inspect.to_s.green
     unfinished << game_s
   end
 
@@ -159,11 +141,9 @@ end
 
 get '/quit' do
   game_id = params[:game_id].to_i
-  puts game_id.to_s.red
   game = games[game_id]
 
   record = GameDB.last( :game_id => game_id )
-  puts record.destroy.to_s.blue
 
   errormessage = ""
   greeting = ""
@@ -239,10 +219,6 @@ get '/multiplayer_play' do
 
   inactive_games = GameDB.all(:active => false)
 
-  inactive_games.each do |record|
-    puts record.inspect.to_s.blue
-  end
-
   if game != nil
       player = PlayerDB.first( :player_id => game.player_id )
       greeting = "You are guessing #{player.player_name}'s word!"
@@ -270,12 +246,10 @@ get '/scores' do
     if challenger_id == session[:id]
       game = game_struct.new( games[record.game_id].get_answer, games[record.game_id].lives.number_of_lives, "you")
       players_struct << game
-      puts "YOU".red
     else
       challenger = PlayerDB.first(:player_id => record.challenger_id)
       game = game_struct.new( games[record.game_id].get_answer, games[record.game_id].lives.number_of_lives, challenger.player_name)
       challengers_struct << game
-      puts "CHALLENGER".blue
     end
   end
 
@@ -304,7 +278,6 @@ get '/guess' do
   if hangman_game.is_won?
     record = GameDB.first( :game_id => session[:game_id] )
     record.update( :score => hangman_game.lives.number_of_lives, :finished => true)
-    puts record.inspect.to_s.red
     erb :'/won', :locals => {:answer => hangman_game.get_answer} 
   elsif hangman_game.is_over?
     record = GameDB.first( :game_id => session[:game_id])
